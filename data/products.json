@@ -1,0 +1,29 @@
+[
+    {
+      "name": "Reloj Lacoste",
+      "description": "Con una nueva caja redondeada y facetada y un bisel con acabado mate, el reloj de tres manecillas se ofrece en una variedad de colores monocromáticos, incluido el clásico verde Lacoste.",
+      "image": "../imgs/reloj2.jpg",
+      "price": 43000,
+      "stock": [
+        "11"
+      ],
+      "id": 2
+    },
+    {
+      "name": "Reloj Tommy Hilfiger para mujer",
+      "description": "Este reloj atemporal presenta una delicada pulsera de malla que le da una sensación elegante",
+      "image": "../imgs/reloj3.jpg",
+      "price": 49000,
+      "stock": [7],
+      "id": 3
+    },
+    {
+      "name": "Reloj Swatch White Rebel de silicona",
+      "description": "La esfera blanca incluye finos índices horarios blancos tono sobre tono, y una elegante ventana blanca sobre gris claro con el día y la fecha a las 3. Las manecillas blancas para las horas y los minutos que brillan en la oscuridad, y un fino segundero blanco, marcan la hora del día.",
+      "image": "../imgs/reloj4.jpg",
+      "price": 36000,
+      "stock": [10],
+      "id": 4
+    }
+  ]
+ 
