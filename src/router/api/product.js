@@ -1,21 +1,24 @@
-import express from 'express'
-import manager from './products.js'
+import { Router } from "express";
 
-let server = express()
+const product_router = Router()
 
-let PORT = 8080
-let ready = () => console.log('server ready on port:' + PORT);
+product_router.get('/',(req,res, next)=>{
+    try{
+        res.json({status:'ok'})
 
-server.listen(PORT, ready)
-server.use(express.json())
-server.use(express.urlencoded({ extended: true }))
+    }catch(error){
+        next(error)
+    }
+})
+
+product_router.delete()
 
 let index_route = '/'
 let index_function = (req, res) => {
     let quantity = manager.get_products().lenght
     return res.send(`there are ${quantity} products`)
 }
-server.get(index_route, index_function)
+product_router.get(index_route, index_function)
 
 let one_route = '/products/:id'
 let one_function = (req, res) => {
@@ -36,7 +39,7 @@ let one_function = (req, res) => {
     }
 
 }
-server.get(one_route, one_function)
+product_router.get(one_route, one_function)
 
 let query_route = '/products'
 let query_function = (req, res) => {
@@ -56,11 +59,11 @@ let query_function = (req, res) => {
     }
 
 }
-server.get(query_route, query_function)
+product_router.get(query_route, query_function)
 
-//products: 'inexistente'
+products: 'inexistente'
 
-server.post(
+product_router.post(
     '/products',
     async (req, res) => {
         try {
@@ -93,7 +96,7 @@ server.post(
     }
 )
 
-server.put(
+product_router.put(
     '/products/:pid',
     (req, res) => {
         if (req.body&&req.params.pid){
@@ -114,3 +117,4 @@ server.put(
     //en este caso no necesito esperar la actaulizacion, debido a que los datos de la actualizacion no se utilizan para operar o enviar al cliente en la respuesta. por eso no necesito una async
 )
 
+export default product_router
