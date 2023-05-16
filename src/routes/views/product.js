@@ -5,7 +5,6 @@ const product_router = Router()
 product_router.get('/',(req,res, next)=>{
     try{
         res.json({status:'ok'})
-
     }catch(error){
         next(error)
     }
