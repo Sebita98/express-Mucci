@@ -1,4 +1,13 @@
 import { Router } from "express";
+import { Router } from "express";
+import messages_router from "./messages";
+
+const views_router = Router()
+
+views_router.use(
+    "/code",
+    messages_router
+)
 
 const router = Router()
 

@@ -2,8 +2,10 @@ import {Router }from "express";
 import api_router from '../api/index.js'
 import views_router from './index.js'
 
-const router = Router()
 
+
+
+const router = Router()
 
 router.use('/api', api_router)
 //todas las rutas de la api rest va a tener el endpoint /api
