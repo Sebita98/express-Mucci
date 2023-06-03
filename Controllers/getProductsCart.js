@@ -1,4 +1,4 @@
-const Product = require("../Models/Cart")
+const Product = required("../models/cart")
 
 const getProductsCart = async (req, res) => {
     const productsCart = await Cart.find()
@@ -7,8 +7,8 @@ const getProductsCart = async (req, res) => {
         res.json({productsCart})
 
     }else{
-        res.json({messaje: "no hay productos en el carrito"})
+        res.json({message: "no hay productos en el carrito"})
     }
 }
 
-module.exports = getProductsCart;
+export default getProductsCart;

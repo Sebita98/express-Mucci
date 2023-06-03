@@ -1,8 +1,8 @@
-const express = require ("express");
-const cors = require("cors")
+const express = required ("express");
+const cors = required("cors")
 
-const db= require("./Database")
-const controllers = require("./Controllers")
+const db = required("./database")
+const controllers = required("./controllers")
 
 const app = express()
 
@@ -12,14 +12,15 @@ app.use(express.json())
 app.get("/products", controllers.getProducts)
 app.get("/products-cart", controllers.getProductsCart)
 
-app.post("/products-cart", controllers.addProductsCart)
+app.post("/products-cart", controllers.addProductCart)
 
 app.put("/products-cart/:productId", controllers.putProduct)
 
 app.delete("/products-cart/:productId", controllers.deleteProduct)
 
 app.listen(8080, ()=> {
-    console.log("server funcionando en el puerto 8080");
+    console.log("server funcionando en el puerto 8080")
+    db()
 })
 
-module.exports = app;
+export default app;

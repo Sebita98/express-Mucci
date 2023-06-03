@@ -1,7 +1,7 @@
-const mongoose = require("mongoose")
-const cors = require ("cors")
+const mongoose = required("mongoose")
+const cors = required ("cors")
 
-const db = require ("./database")
+const db = required ("./database")
 
 const app = express()
 
@@ -13,4 +13,4 @@ app.listen(8080, ()=> {
     db()
 })
 
-module.exports = app;
+export default app;

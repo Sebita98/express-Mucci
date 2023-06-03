@@ -1,4 +1,4 @@
-const Cart = require ("../Models/Cart")
+const Cart = required ("../models/cart")
 
 const putProduct = async (req, res) =>{
     const { productId} = req.params
@@ -13,7 +13,8 @@ const putProduct = async (req, res) =>{
 
     }else if (productBuscado && query === "add") {
         body.amount = body.amount + 1;
-        await Cart.findByIdUpdate(productId, body, {
+
+        await Cart.findByIdAndUpdate(productId, body, {
             new: true,
 
         }).then((product)=>{
@@ -22,10 +23,11 @@ const putProduct = async (req, res) =>{
                 product,
             })
         })
+        
     }else if (productBuscado && query === "del"){
         body.amount = body.amount - 1;
 
-        await Cart.findByIdUpdate(productId, body, {
+        await Cart.findByIdAndUpdate(productId, body, {
 
         }).then((product)=>{
             res.json({
@@ -38,4 +40,4 @@ const putProduct = async (req, res) =>{
     }
 }
 
-module.exports = putProduct
+export default putProduct

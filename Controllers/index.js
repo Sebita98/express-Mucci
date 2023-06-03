@@ -1,10 +1,10 @@
-const getProducts = require("./getProducts")
-const getProductsCart = require("./getProductsCart.js")
-const addProductCart = require("./addProductCart.js")
-const putProduct = require("./putProducts")
-const deleteProduct = require("./deleteProducts")
+const getProducts = required("./getProducts")
+const getProductsCart = required("./getProductsCart.js")
+const addProductCart = required("./addProductCart.js")
+const putProduct = required("./putProducts")
+const deleteProduct = required("./deleteProducts")
 
-module.exports ={
+export default{
     getProducts,
     getProductsCart,
     addProductCart,

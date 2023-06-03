@@ -1,5 +1,5 @@
-const Cart = require ("../Models/Cart")
-const Product = require("../Models/Products")
+const Cart = required ("../models/cart")
+const Product = required("../models/products")
 
 const addProductCart = async (req,res) =>{
     const {name, img, price} = req.body;
@@ -12,7 +12,7 @@ const addProductCart = async (req,res) =>{
 
     if(estaEnProducts){
         res.status(800).json({
-            messaje: "Este producto no se encuentra en nuestra base de datos"
+            message: "Este producto no se encuentra en nuestra base de datos"
         })
 
     }else if (noEstaVacio && !estaEnElCarrito){
@@ -26,7 +26,7 @@ const addProductCart = async (req,res) =>{
         .then((product)=>{
             newProductInCart.save()
             res.json({
-                mensaje: `El producto fue agregado al carrito`,
+                message: `El producto fue agregado al carrito`,
                 product,
             })
         })
@@ -39,4 +39,4 @@ const addProductCart = async (req,res) =>{
     }
 }
 
-module.exports = addProductCart
+export default addProductCart
