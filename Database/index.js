@@ -1,7 +1,7 @@
-const mongoose = required("mongoose")
-const cors = required ("cors")
+const mongoose = require("mongoose")
+const cors = require ("cors")
 
-const db = required ("./database")
+const db = require ("./database")
 
 const app = express()
 

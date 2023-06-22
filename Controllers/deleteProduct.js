@@ -1,5 +1,5 @@
-const Cart = required ("../models/cart")
-const Product = required ("../models/products")
+const Cart = require ("../models/cart")
+const Product = require ("../models/products")
 
 const deleteProduct = async (req, res) => {
     const {productId} = req.params

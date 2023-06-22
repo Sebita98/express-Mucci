@@ -1,4 +1,4 @@
-const Cart = required ("../models/cart")
+const Cart = require ("../models/cart")
 
 const putProduct = async (req, res) =>{
     const { productId} = req.params

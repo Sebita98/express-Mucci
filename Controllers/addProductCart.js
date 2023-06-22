@@ -1,5 +1,5 @@
-const Cart = required ("../models/cart")
-const Product = required("../models/products")
+const Cart = require ("../models/cart")
+const Product = require("../models/products")
 
 const addProductCart = async (req,res) =>{
     const {name, img, price} = req.body;
