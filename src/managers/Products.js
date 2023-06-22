@@ -5,7 +5,7 @@ class ProductManager {
     constructor(path) {
         this.products = []     //para guardar en la memoria todos los productos
         this.path = path    //para guardar en la memoria la ruta del archivo
-        this.init(path)     //para iniciar la instancia y crear el archivo en caso de no existir o cargar la memoria en caso de existir usuarios
+        this.init(path)     //para iniciar la instancia y crear el archivo en caso de no existir o cargar la memoria en caso de existir productos
     }
     init(path) {
         //verifico si existe el archivo
@@ -17,7 +17,7 @@ class ProductManager {
             console.log('file created at path: '+this.path)
             return 'file created at path: '+this.path
         } else {
-            //si existe cargo los usuarios en la memoria del programa
+            //si existe cargo los productos en la memoria del programa
             this.products = JSON.parse(fs.readFileSync(path,'UTF-8'))
             console.log('data recovered')
             return 'data recovered'
@@ -44,7 +44,7 @@ class ProductManager {
             //sobre-escribo el archivo
             await fs.promises.writeFile(this.path,data_json)
             console.log('id´s created product: '+data.id)
-            return 'id´s product: '+data.id
+            return data
         } catch(error) {
             console.log(error)
             return 'error: creating product'
