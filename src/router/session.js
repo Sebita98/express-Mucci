@@ -1,38 +1,39 @@
 import { Router } from "express"
+import auth from '../middlewares/auth.js'
+
 const sessions_router = Router()
 
-sessions_router.get('/', async (req, res) => {
-    if (!req.session.counter) { req.session.counter = 1 }
-    else { req.session.counter++ }
-    return res.status(200).json({
-        message: `han ingresado ${req.session.counter}usuarios`
-    })
+//COUNTER
+sessions_router.get('/',async(req,res)=> {
+    if (!req.session.counter) {
+        req.session.counter = 1
+    } else {
+        req.session.counter++
+    }
+    return res.status(200).json({ message: `han ingresado ${req.session.counter} usuarios`})
 })
-
-sessions_router.post('/login', async (req, res, next) => {
+//LOGIN
+sessions_router.post('/login',async(req,res,next)=> {
     try {
-        const { email } = req.body
-        req.session.email = email
-        return res.status(200).json({
-            succes: true,
-            message: email + 'inicio sesion'
-        })
+        const { mail } = req.body
+        req.session.mail = mail
+        return res.status(200).json({ message: `${req.session.mail} ha iniciado sesión`})
     } catch (error) {
-        next(error)
+        next()
     }
 })
-
-sessions_router.post('/signout', async (req, res, next) => {
+//PRIVATE
+sessions_router.get('/private',auth, (req, res) => {
+    return res.status(200).json({ message: 'administrador autorizado' })
+})
+//LOGOUT
+sessions_router.post('/logout',async(req,res,next)=> {
     try {
         req.session.destroy()
-        return res.status(200).json({
-            message: 'cerro sesion'
-        })
+        return res.status(200).json({ message: `ha cerrado sesión`})
     } catch (error) {
-        next(error)
+        next()
     }
 })
-
-
 
 export default sessions_router

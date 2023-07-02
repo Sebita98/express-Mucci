@@ -1,17 +1,19 @@
-document.getElementById('register').addEventListener('click',(event)=>{
+document.getElementById('register').addEventListener('click', (event) => {
     event.preventDefault()
-    let email = document.getElementById('email').value
-    console.log(email)
-    fetch(`/api/cookies/set/${email}`)
-    .then(res=>res.json())
-    .then(res=>alert(res.message))
-    .catch(err=>console.log(err))
-})
-
-document.getElementById('cookie').addEventListener('click', (event)=>{
-    event.preventDefault()
-    fetch('/api/cookies/get')
-    .then(res=>res.json())
-    .then(res=>alert(req.cookies.user))
-    .catch(err=>console.log(err))
+    let data = {
+        name: document.querySelector('#name').value,
+        photo: document.querySelector('#photo').value,
+        age: document.querySelector('#age').value,
+        mail: document.querySelector('#mail').value,
+        password: document.querySelector('#password').value,
+    }
+    console.log(data)
+    fetch(`/api/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        .then(res => console.log(res))    //en lugar de imprimir en consola: mostrar mensaje de alerta
+        .catch(err => console.log(err))   //en lugar de imprimir en consola: mostrar mensaje de alerta
 })

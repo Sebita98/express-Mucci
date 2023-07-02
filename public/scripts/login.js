@@ -1,25 +1,16 @@
-document.getElementById('register').addEventListener('click', (event) => {
+document.getElementById('login').addEventListener('click',(event)=>{
     event.preventDefault()
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    console.log({ email, password })
-    fetch('/api/sessions/login', {
+    let data = {
+        mail: document.querySelector('#mail').value,
+        password: document.querySelector('#password').value,
+    }
+    console.log(data)
+    fetch(`/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-
+        body: JSON.stringify(data)
     })
-        .then(res => res.json())
-        .then(res => alert(res.message))
-        .catch(err => console.log(err))
-})
-
-document.getElementById('signout').addEventListener('click', (event) => {
-    event.preventDefault()
-    fetch('/api/sessions/signout', {
-        method: 'POST',
-    })
-        .then(res => res.json())
-        .then(res => alert(res.message))
-        .catch(err => console.log(err))
+        .then(res=>res.json())
+        .then(res=>console.log(res))    //en lugar de imprimir en consola: mostrar mensaje de alerta
+        .catch(err=>console.log(err))   //en lugar de imprimir en consola: mostrar mensaje de alerta
 })
