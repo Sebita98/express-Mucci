@@ -12,6 +12,7 @@ import passport from 'passport'
 import inicializePassport from './config/passport.js'
 
 const server = express()
+const PORT = process.env.PORT || 8080
 //const FileStore = sessionFileStore(expressSession)
 //middlewares
 server.use(cookieParser(process.env.SECRET_COOKIE))
@@ -39,5 +40,19 @@ server.use(passport.session())
 server.use('/api',router)
 server.use(error_handler)
 server.use(not_found_handler)
+
+
+app.use('/api/users',  usersRouter.getRouter())
+app.use('/pruebas',  pruebasRouter)
+
+app.use((err, req, res, next)=>{
+    console.log(err)
+    res.status(500).send('Todo mal')
+})
+
+const httpServer = app.listen(PORT,err =>{
+    if (err)  console.log(err)
+    console.log(`Escuchando en el puerto: ${PORT}`)
+})
 
 export default server

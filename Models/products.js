@@ -1,10 +1,22 @@
 import {model, Schema} from "mongoose"
+const mongoosePaginate = require('mongoose-paginate-v2')
 
-const CartSchema = new Schema ({
-    name: {type: String, required: true, unique: true},
-    img: {type: String, required: true},
-    inCart: {type: Boolean, default: false},
-    price: {type: Number, required: true},
+const collection = 'products'
+
+const productSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    description: String,
+    thumbnail: String, 
+    price: Number, 
+    stock: Number    
 })
 
-export default model("product", CartSchema)
+productSchema.plugin(mongoosePaginate)
+const productModel = model(collection, productSchema)
+
+module.exports = {
+    productModel
+}

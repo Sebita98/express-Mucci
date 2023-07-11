@@ -2,6 +2,21 @@ import { Router } from "express"
 import auth from '../middlewares/auth.js'
 
 const sessions_router = Router()
+const jwt = require('jsonwebtoken')
+
+class SessionRouter extends Router {
+    init() {
+        this.post('/login', ['PUBLIC'], (req,res)=>{
+            let user = {
+                email: req.body.email,
+                role: 'user_premiun'
+            }
+            let token = jwt.sign(user, 'CoderSecretClassRouter')
+            res.sendSuccess({token})
+        })
+    }
+}
+
 
 //COUNTER
 sessions_router.get('/',async(req,res)=> {
