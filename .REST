@@ -1,0 +1,20 @@
+
+OBTENGA http://localhost:8080/api/usuarios HTTP/1.1
+
+### OBTENER http://localhost:8080/api/users/currentUser HTTP/1.1 Tipo de contenido: aplicación/autorización json: Portador dCI6MTY4ODY4MTM2Mn0.9wq18LY8NKL0eLa6HNHfjm468hWuJCaMa6bGt0sJn7w
+
+### POST POST http://localhost:8080/api/session/login HTTP/1.1 Tipo de contenido: application/json
+
+{
+"correo electrónico": " f@gmail.com ", "contraseña": "123456"
+}
+
+### OBTENER http://localhost:8080/pruebas /ñ
+
+// productos ### OBTENER http://localhost:8080/api/productos
+
+### POST http://localhost:8080/api/products Tipo de contenido: application/json
+
+{
+"título": "Gorra Rosa", "descripción": "ESto es una gorra1", "miniatura": "imagen", "precio": 2500, "stock": 150
+}
