@@ -1,32 +1,24 @@
 const { Router } = require('express')
 const {fork} = require('child_process')
+const { sendMail } = require('../utils/sendMail')
+const { sendSms, sendWhatsapp } = require('../utils/sendSms')
 
 const router = Router()
-function operacionCompleja() {
-    let result = 0
-    for (let i = 0; i < 9e9; i++) {
-        result += i        
-    }
-    return result
-}
-router.get('/block', (req,res)=>{
-    const result = operacionCompleja()
-    res.send(`El resultado es ${result}`)
+
+
+
+router.get('/mail', async (req,res)=> {
+    await sendMail()
+    res.send('Email enviado')
 })
 
-router.get('/noblock', (req,res)=>{
-    // console.log(__dirname)
-    const child = fork('./src/routes/operacionCompleja.js')
-    child.send('Inicia el proceso de cálculo')
-    child.on('message', result => {
-        // res.send()
-        res.send(`El resultado es: ${result}`)
-    })
+router.get('/sms', async (req,res)=> {
+    await sendSms('Fede', 'Osandón')       
+    res.send('SMS enviado')
 })
-
-router.get('/', (req,res)=>{
-    
-    res.send(`ruta de prueba para suma`)
+router.get('/chat', async (req,res)=> {  
+    await sendWhatsapp('Fede', 'Osandón')    
+    res.send('SMS enviado')
 })
 
 
