@@ -4,9 +4,7 @@
       "description": "Con una nueva caja redondeada y facetada y un bisel con acabado mate, el reloj de tres manecillas se ofrece en una variedad de colores monocromáticos, incluido el clásico verde Lacoste.",
       "image": "../imgs/reloj2.jpg",
       "price": 43000,
-      "stock": [
-        "11"
-      ],
+      "stock": ["11"],
       "id": 2
     },
     {
