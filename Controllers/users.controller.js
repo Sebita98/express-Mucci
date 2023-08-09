@@ -1,5 +1,9 @@
 const { UserDTO } = require("../dto/user.dto")
-const UserManagerMongo = require("../managers/user.mongo")
+const UserManagerMongo = require("../dao/Mongo/user.mongo")
+
+const CustomError = require("../utils/error/customeError")
+const { EErrors } = require("../utils/error/enums")
+const { generateUserErrorsInfo } = require("../utils/error/generateInfoUser")
 
 
 class UserController {
@@ -31,22 +35,31 @@ class UserController {
         }
     }
     
-    createUsers = async (req, res)=>{
+    createUsers = async (req, res, next)=>{
         try {
-            let { first_name, apellido, email,  password } = req.body // viene del cliente
-            // console.log(user)
-            if(!first_name || !apellido || !email, !password) { 
-                return res.status(400).send({status:'error', mensaje: 'todos los campos son necesarios'})
+            let { first_name, last_name, email,  password  } = req.body // viene del cliente
+            console.log(email)
+            if(!first_name || !last_name || !email) { 
+                CustomError.createError({
+                    name: 'User creation error',
+                    cause: generateUserErrorsInfo({first_name, last_name, email}),
+                    message: 'Error trying to created user',
+                    code: EErrors.INVALID_TYPE_ERROR
+                })
             }
     
-            let newUser = new UserDTO({first_name, apellido, email, password})
+            // let newUser = new UserDTO({first_name, apellido, email, password})
             
-            let result =  await this.service.create(newUser)// error
+            // let result =  await this.service.create(newUser)// error
     
             
-            res.status(200).send({result})
+            res.status(200).send({
+                status: 'success',
+                message: 'User created',
+                payload: {first_name, last_name, email}
+            })
         } catch (error) {
-            console.log(error)
+            next(error)
         }
         
     }
