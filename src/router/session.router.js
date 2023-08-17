@@ -1,7 +1,7 @@
 import { Router } from "express"
 import auth from '../middlewares/auth.js'
 
-const sessions_router = Router()
+const session_router = Router()
 const jwt = require('jsonwebtoken')
 
 class SessionRouter extends Router {
@@ -17,9 +17,33 @@ class SessionRouter extends Router {
     }
 }
 
+session_router.post('/login', async (req,res)=>{
+const{email, password} =req.body
+
+
+const {password:pass, ...userDb} = await userModel.findOne({email})
+
+if (!userDb) return res.send({status: 'error', message: 'no existe ese usuario, revisar'})
+
+
+if (!isValidPassword(password,userDb)) return res.status(401).send({
+    status: 'error',
+    message:'el usuario o contraseña es incorrecta'
+
+})
+})
+
+session_router.post('/login', (req,res)=>{
+    res
+    .cookie('token', valorToken,{
+        expires:111111000000*30*60,
+        httpOnly: true
+    })
+    .send('login')
+})
 
 //COUNTER
-sessions_router.get('/',async(req,res)=> {
+session_router.get('/',async(req,res)=> {
     if (!req.session.counter) {
         req.session.counter = 1
     } else {
@@ -28,7 +52,7 @@ sessions_router.get('/',async(req,res)=> {
     return res.status(200).json({ message: `han ingresado ${req.session.counter} usuarios`})
 })
 //LOGIN
-sessions_router.post('/login',async(req,res,next)=> {
+session_router.post('/login',async(req,res,next)=> {
     try {
         const { mail } = req.body
         req.session.mail = mail
@@ -38,11 +62,11 @@ sessions_router.post('/login',async(req,res,next)=> {
     }
 })
 //PRIVATE
-sessions_router.get('/private',auth, (req, res) => {
+session_router.get('/private',auth, (req, res) => {
     return res.status(200).json({ message: 'administrador autorizado' })
 })
 //LOGOUT
-sessions_router.post('/logout',async(req,res,next)=> {
+session_router.post('/logout',async(req,res,next)=> {
     try {
         req.session.destroy()
         return res.status(200).json({ message: `ha cerrado sesión`})
@@ -51,4 +75,4 @@ sessions_router.post('/logout',async(req,res,next)=> {
     }
 })
 
-export default sessions_router
+export default session_router

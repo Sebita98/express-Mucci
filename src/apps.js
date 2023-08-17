@@ -18,8 +18,11 @@ app.use(cors())
 
 initializePassport()
 app.use(passport.initialize())
+app.use(addLogger)
 
 app.use(appRouter)
+
+app.use(errorMiddleware)
 
 app.use((err, req, res, next)=>{
     console.log(err)
