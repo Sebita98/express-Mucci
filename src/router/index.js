@@ -17,4 +17,9 @@ router.use('/api/products',productRouter)
 router.use('/cookies',cookies_router)
 router.use('/sessions',sessions_router)
 
+router.get('/email',(req, res) => {
+    sendMail('projectodigitalgen@gmail.com', 'CAmbio de pass', '<h1>Prueba Node </h1>')
+    res.send('mail enviado');
+})
+
 export default router

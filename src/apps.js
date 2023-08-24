@@ -1,41 +1,23 @@
-// const express = require('express')
-const express                = require('express')
-// const usersRouter         = require('./src/routes/users.router.js') 
-const appRouter              = require('./routes')  
-const { initializePassport } = require('./utils/passport-jwt/passport.config')
-const { config }             = require('./config/config.js')
-const passport               = require('passport')
-const cors                   = require('cors')
+const {logger} = require ("./config/logger")
+const {httpServer} = require("./server")
+const cluster = require('node:cluster')
+const {cpus} = require('node:os')
 
-// console.log(config)
-const app = express()
-config.connectDB()
-const PORT = config.PORT
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-app.use(cors())
 
-initializePassport()
-app.use(passport.initialize())
-app.use(addLogger)
+const numeroProcesadores = cpus().lenght
+// console.log(cluster.isPrimary)
+// //console.log('pid:', process.pid);
 
-app.use(appRouter)
+// if(cluster.isPrimary){
+//     logger.info('procesos primario, generando un worker')
+//     cluster.fork()
+// }else{
+//     console.log('al ser un proceso forkeado, no cuento como primario, por lo tanto primary es false, entonces soy un worker');
 
-app.use(errorMiddleware)
+// }
 
-app.use((err, req, res, next)=>{
-    console.log(err)
-    res.status(500).send('Todo mal')
-})
 
-const httpServer = app.listen(PORT,err =>{
-    if (err)  console.log(err)
-    console.log(`Escuchando en el puerto: ${PORT}`)
-})
 
-// socket io
 
-// jwt o session 
-
- 
+// httpServer()

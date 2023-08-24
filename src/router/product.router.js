@@ -21,4 +21,14 @@ router.post('/', createProduct)
 router.put('/:pid', updateProduct)
 router.delete('/:pid', deleteProduct)
 
+router.get('/',productsController.getProducts)
+
+router.get('/:pid', productsController.getProduct)
+
+router.post('/', productsController.createProduct)
+
+router.put('/:pid', productsController.updateProduct)
+
+router.delete('/:pid', productsController.deleteProduct)
+
 module.exports = router

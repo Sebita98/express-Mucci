@@ -1,12 +1,29 @@
 const nodemailer = require('nodemailer')
 const { config } = require('../config/config.js')
+const { createTransport } = require('nodemailer')
+const { config: {google_mail_password, google_mail_user} } = require('../config/config')
+
+
+
+
+const sendMail = async (userMail, subject, html)=>{
+    return await transport.sendMail({
+        from: `<Servicion de email ${google_mail_user}>`,
+        to: userMail,
+        subject,
+        html
+    })
+}
+
 
 const transport = nodemailer.createTransport({
     service: 'gmail',
     port: 587,
     auth: {
         user: config.gmail_user_app,
-        pass: config.gmail_pass_app
+        pass: config.gmail_pass_app,
+        user: google_mail_user,
+        pass: google_mail_password
     }
 })
 
@@ -24,3 +41,5 @@ exports.sendMail = async () => {
         }]
     })
 }
+
+module.exports = { sendMail }

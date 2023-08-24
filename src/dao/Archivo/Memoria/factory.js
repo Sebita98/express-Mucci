@@ -21,9 +21,21 @@ switch (persistence) {
         // UserDao = require('../dao/File/user.file.js')
         // ProductDao = require('../dao/File/product.file.js')        
         break;
-
     
 }
+
+
+switch (config.persistence) {
+    case 'MONGO':
+        config.dbConnection()    
+        // ProductDao = await import('./Mongo/product.mongo.js')
+        ProductDao = require('./Mongo/product.mongo.js')         
+        break;
+
+    default:
+        break;
+}
+
 
 module.exports = {
     ProductDao,
