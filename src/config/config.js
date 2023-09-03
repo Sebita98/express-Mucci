@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 // const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const { commander } = require('../utils/commander')
@@ -56,3 +57,9 @@ module.exports = {
 // https://minikube.sigs.k8s.io/docs/start/ -> descarga
 
 // kubectl cluster-info
+
+export default {
+    mongo:{
+        URL: process.env.MONGO_URL
+    }
+}

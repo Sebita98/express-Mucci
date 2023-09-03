@@ -1,0 +1,12 @@
+OBTENER http://localhost:8080/ HTTP/1.1
+
+### POST http://localhost:8080/api/sessions/register HTTP/1.1 Tipo de contenido: aplicación/json
+
+{
+"first_name": "Sebastian", "apellido": "Mucci", "email": " mucci310@gmail.com ", "contraseña": "12346"
+}
+POST http://localhost:8080/api/sessions/login HTTP/1.1 Tipo de contenido: aplicación/json
+
+{
+"first_name": "Sebastian", "apellido": "Mucci", "email": " mucci310@gmail.com ", "contraseña": "12346"
+}

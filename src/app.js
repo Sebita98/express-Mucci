@@ -56,3 +56,82 @@ const httpServer = app.listen(PORT,err =>{
 })
 
 export default server
+
+
+
+
+
+//todo lo de abajo es para la parte de seguridad!!!
+import express from 'express';
+import handlebars from 'express-handlebars';
+import __dirname from './utils.js';
+import viewsRouter from './routes/views.router.js';
+import sessionsRouter from './routes/sessions.router.js';
+import usersRouter from './routes/users.router.js';
+import cookieParser from 'cookie-parser';
+import mongoose from 'mongoose';
+import config from './config/config.js';
+
+const app = express();
+const connection = mongoose.connect(config.mongo.URL)
+
+app.engine('handlebars',handlebars.engine());
+app.set('views',`${__dirname}/views`);
+app.set('view engine','handlebars');
+
+app.use(express.json());
+app.use(express.static(__dirname+'/public'))
+app.use(express.urlencoded({extended:true}))
+app.use(cookieParser());
+
+app.use('/',viewsRouter);
+app.use('/api/sessions',sessionsRouter);
+app.use('/api/users',usersRouter);
+
+app.listen(8080,()=>console.log(`Listening on PORT 8080`))
+
+
+
+
+
+
+//aca abajo toda la clase sobre documentacion de api
+import express from 'express'
+import mongoose from 'mongoose'
+import cookieParser from 'cookie-parser';
+
+import usersRouter from './routes/users.router.js'
+import petsRouter from './routes/pets.router.js'
+import adoptionsRouter from './routes/adoption.router.js'
+import sessionsRouter from './routes/sessions.router.js'
+import dotenv from 'dotenv'
+// importar lo que instalamos de swagger
+import swaggerJsDoc from 'swagger-jsdoc'
+import swaggerUiExpress from 'swagger-ui-express'
+import __dirname from './utils/index.js'
+
+app.use(express.json())
+app.use(cookieParser())
+console.log(`${__dirname}/docs/**/*.yaml`)
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.1', // conjunto de reglass 
+        info: {
+            title: 'Documentación de app de Adoptame',
+            description: 'Api pensada para adopción de mascotas'
+        }
+    },
+    apis: [`${__dirname}/docs/**/*.yaml`]
+}
+
+console.log(swaggerJsDoc.definition)
+
+const specs = swaggerJsDoc(swaggerOptions)
+app.use('/docs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
+
+app.use('/api/users',usersRouter)
+app.use('/api/pets',petsRouter)
+app.use('/api/adoptions',adoptionsRouter)
+app.use('/api/sessions',sessionsRouter)
+
+app.listen(PORT,()=>console.log(`Listening on ${PORT}`))
