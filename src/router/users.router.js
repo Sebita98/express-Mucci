@@ -1,5 +1,6 @@
-// const { Router } = require('express')
+const { Router } = require('express')
 // const { UserModel } = require('../dao/Mongo/models/user.model')
+const usersController = require('../controllers/users.controller.js')
 
 // const router = Router()
 
@@ -97,5 +98,9 @@ const router = Router();
 
 router.get('/',usersController.getUsers); // no tiene validaciones Authorizations 
 router.get('/:uid',usersController.getUser);
+router.post('/', usersController.createUser)
+router.put('/:uid',usersController.updateUser)
+router.delete('/:uid',usersController.deleteUser)
+
 
 export default router;

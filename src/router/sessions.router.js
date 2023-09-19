@@ -102,4 +102,11 @@ session_router.post('/register', (req, res) => {
 session_router.post('/register',sessionsController.register)
 session_router.post('/login',sessionsController.login);
 
+
+session_router.post('/register',sessionsController.register)
+session_router.post('/login',sessionsController.login)
+session_router.get('/current',sessionsController.current)
+session_router.get('/unprotectedLogin',sessionsController.unprotectedLogin)
+session_router.get('/unprotectedCurrent',sessionsController.unprotectedCurrent)
+
 export default session_router
